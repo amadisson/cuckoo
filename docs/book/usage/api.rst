@@ -159,6 +159,8 @@ each one. For details click on the resource name.
 | ``GET`` :ref:`tasks_report`         | Returns the report generated out of the analysis of the task associated with the specified ID.                   |
 |                                     | You can optionally specify which report format to return, if none is specified the JSON report will be returned. |
 +-------------------------------------+------------------------------------------------------------------------------------------------------------------+
+| ``GET`` :ref:`tasks_summary`        | Returns a condensed report in JSON format.                                                                       |
++-------------------------------------+------------------------------------------------------------------------------------------------------------------+
 | ``GET`` :ref:`tasks_shots`          | Retrieves one or all screenshots associated with a given analysis task ID.                                       |
 +-------------------------------------+------------------------------------------------------------------------------------------------------------------+
 | ``GET`` :ref:`tasks_rereport`       | Re-run reporting for task associated with a given analysis task ID.                                              |
@@ -173,7 +175,7 @@ each one. For details click on the resource name.
 +-------------------------------------+------------------------------------------------------------------------------------------------------------------+
 | ``GET`` :ref:`files_get`            | Returns the content of the binary with the specified SHA256 hash.                                                |
 +-------------------------------------+------------------------------------------------------------------------------------------------------------------+
-| ``GET`` :ref:`pcap_get`             | Returns the content of the PCAP associated with the given task.                                                  |
+| ``GET`` :ref:`api_pcap_get`         | Returns the content of the PCAP associated with the given task.                                                  |
 +-------------------------------------+------------------------------------------------------------------------------------------------------------------+
 | ``GET`` :ref:`machines_list`        | Returns the list of analysis machines available to Cuckoo.                                                       |
 +-------------------------------------+------------------------------------------------------------------------------------------------------------------+
@@ -681,6 +683,30 @@ Returns the report associated with the specified task ID.
 * ``400`` - invalid report format
 * ``404`` - report not found
 
+.. _tasks_summary:
+
+/tasks/summary
+--------------
+
+**GET /tasks/summary/** *(int: id)*
+
+Returns a condensed report associated with the specified task ID in JSON format.
+
+**Example request**.
+
+.. code-block:: bash
+
+    curl http://localhost:8090/tasks/summary/1
+
+**Parameters**:
+
+* ``id`` *(required)* *(int)* - ID of the task to get the report for
+
+**Status codes**:
+
+* ``200`` - no error
+* ``404`` - report not found
+
 .. _tasks_shots:
 
 /tasks/screenshots
@@ -886,7 +912,7 @@ Returns details on the file matching either the specified MD5 hash, SHA256 hash 
 * ``200`` - no error
 * ``404`` - file not found
 
-.. _pcap_get:
+.. _api_pcap_get:
 
 /pcap/get
 ---------
